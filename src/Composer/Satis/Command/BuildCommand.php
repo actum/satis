@@ -328,6 +328,11 @@ EOT
                 continue;
             }
 
+            if ('magento-module' === $package->getType()) {
+               $output->writeln(sprintf("<info>Skipping '%s' (is already dist package)</info>", $name));
+               continue;
+            }
+
             $names = $package->getNames();
             if ($whitelist && !array_intersect($whitelist, $names)) {
                 $output->writeln(sprintf("<info>Skipping '%s' (is not in whitelist)</info>", $name));
