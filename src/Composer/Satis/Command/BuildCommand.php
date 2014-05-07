@@ -329,8 +329,11 @@ EOT
             }
 
             if ('magento-module' === $package->getType()) {
-               $output->writeln(sprintf("<info>Skipping '%s' (is already dist package)</info>", $name));
-               continue;
+                $distUrl = $package->getDistUrl();
+                if (!empty($distUrl)) {
+                    $output->writeln(sprintf("<info>Skipping '%s' (is already dist package)</info>", $name));
+                    continue;
+                }
             }
 
             $names = $package->getNames();
